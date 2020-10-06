@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Air Visual API</title>
+</head>
+<body>
+    <h1>AirVisual Search by Country, State, and city</h1>
+
+    <div class="wrapper">
+        <select name="country" class="choose" id="selector">
+            <option value="null">Choose Country</option>
+        </select>
+        <select name="state" class="choose" id="selector2" onchange="toggleState()">
+            <option value="null">Choose State</option>
+        </select>
+        <select name="city" class="choose" id="selector3" onchange="toggleCity()">
+            <option value="null">Choose City</option>
+        </select>
+    </div>
+
+    <script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
