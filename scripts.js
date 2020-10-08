@@ -94,6 +94,6 @@ function displayResults(json) {
     let tempInCelcius = json.data.current.weather.tp; //temperature in celcius
     currentCity.innerHTML = cityData;
     timeStamp.innerHTML = currentTime;
-    celciusTemp.innerHTML = tempInCelcius;
+    celciusTemp.innerHTML = tempInCelcius + '°C';
     pollution.innerHTML = polltuionIndex;
 }
