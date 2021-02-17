@@ -83,7 +83,7 @@ function fetchResults(e) {
         return result.json();
     }).then(function(json) {
         displayResults(json);
-        console.log(json);
+
     });
 };
 
