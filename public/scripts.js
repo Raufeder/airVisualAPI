@@ -17,7 +17,7 @@ fetch(baseURL + 'countries?key=' + key)
     .then(json => {
         countryDropDown(json); 
     });
-
+//COUNTRY DROPDOWN FUNCTION
 function countryDropDown(json) {
     for (let i = 0; i < json.data.length; i++) {
         let countryName = json.data[i].country;
@@ -30,28 +30,7 @@ function countryDropDown(json) {
     }
 }
 
-function getCity(event) {
-    fetch(baseURL + 'cities?state=' + event.target.value + '&country=' + countrySelect.value + '&key=' + key)
-        .then(result => {
-            return result.json(); 
-        })
-        .then(json => {
-            toggleCity(json); 
-        });
-}
-stateSelect.addEventListener('change', getCity);
-
-function getState(event) {
-    fetch(baseURL + 'states?country=' + event.target.value + '&key=' + key)
-        .then(result => {
-            return result.json(); 
-        })
-        .then(json => {
-            toggleState(json); 
-        });
-}
-countrySelect.addEventListener('change', getState);
-
+//STATE DROPDOWN FUNCTION
 function toggleState(json) {
     for(stateName of json.data) {
         let option = document.createElement('option');
@@ -63,6 +42,7 @@ function toggleState(json) {
     }
 }
 
+//CITY DROPDOWN FUNCTION
 function toggleCity(json) {
     for(cityName of json.data) {
         let option = document.createElement('option');
@@ -73,8 +53,35 @@ function toggleCity(json) {
         citySelect.appendChild(option);
     }
 }
+
+//CHOSEN COUNTRY TO POPULATE STATES
+function getState(event) {
+    fetch(baseURL + 'states?country=' + event.target.value + '&key=' + key)
+        .then(result => {
+            return result.json(); 
+        })
+        .then(json => {
+            toggleState(json); 
+        });
+}
+countrySelect.addEventListener('change', getState);
+
+//CHOSEN STATE TO POPULATE CITIES
+function getCity(event) {
+    fetch(baseURL + 'cities?state=' + event.target.value + '&country=' + countrySelect.value + '&key=' + key)
+        .then(result => {
+            return result.json(); 
+        })
+        .then(json => {
+            toggleCity(json); 
+        });
+}
+stateSelect.addEventListener('change', getCity);
+
+countrySelect.addEventListener('change', fetchResults);
 citySelect.addEventListener('change', fetchResults);
-//fix search history states and cities
+citySelect.addEventListener('change', fetchResults);
+
 function fetchResults(e) {
     e.preventDefault();
     url = baseURL + 'city?city=' + citySelect.value + '&state=' + stateSelect.value + '&country=' + countrySelect.value + '&key=' + key
