@@ -1,37 +1,24 @@
 const baseURL = "https://api.airvisual.com/v2/";
 const key = "8bac110c-fd5a-4b14-a6b0-f94021ccc437";
 let url;
-//TODO Make it just USA
 //TODO Clear population selection before clicking new option
 const searchForm = document.querySelector("form");
-const countrySelect = document.getElementById("selector1");
-const stateSelect = document.getElementById("selector2");
-const citySelect = document.getElementById("selector3");
+const stateSelect = document.getElementById("selector1");
+const citySelect = document.getElementById("selector2");
 
+let chosenCountry = "USA"
 let chosenState;
 let chosenCity;
 
-// Initial Fetch to populate Countries
-fetch(baseURL + "countries?key=" + key)
+//CHOSEN COUNTRY TO POPULATE STATES
+fetch(baseURL + "states?country=" + chosenCountry + "&key=" + key)
   .then((result) => {
     return result.json();
   })
   .then((json) => {
-    countryDropDown(json);
+    toggleState(json);
   });
-//COUNTRY DROPDOWN FUNCTION
-function countryDropDown(json) {
-  for (let i = 0; i < json.data.length; i++) {
-    let countryName = json.data[i].country;
-    let option = document.createElement("option");
-
-    option.value = countryName;
-    option.innerHTML = `<span>${countryName}</span>`;
-
-    countrySelect.appendChild(option);
-  }
-}
-
+        
 //STATE DROPDOWN FUNCTION
 function toggleState(json) {
   for (stateName of json.data) {
@@ -56,19 +43,6 @@ function toggleCity(json) {
   }
 }
 
-//CHOSEN COUNTRY TO POPULATE STATES
-function getState(event) {
-  fetch(baseURL + "states?country=" + event.target.value + "&key=" + key)
-    .then((result) => {
-      return result.json();
-    })
-    .then((json) => {
-      toggleState(json);
-      console.log(json.data);
-    });
-}
-countrySelect.addEventListener("change", getState);
-
 //CHOSEN STATE TO POPULATE CITIES
 function getCity(event) {
   fetch(
@@ -76,7 +50,7 @@ function getCity(event) {
       "cities?state=" +
       event.target.value +
       "&country=" +
-      countrySelect.value +
+      chosenCountry +
       "&key=" +
       key
   )
@@ -85,14 +59,11 @@ function getCity(event) {
     })
     .then((json) => {
       toggleCity(json);
-      console.log(json.data);
     });
 }
 stateSelect.addEventListener("change", getCity);
 
-// countrySelect.addEventListener("change", fetchResults);
 citySelect.addEventListener("change", fetchResults);
-// stateSelect.addEventListener("change", fetchResults);
 
 function fetchResults(e) {
   e.preventDefault();
@@ -103,7 +74,7 @@ function fetchResults(e) {
     "&state=" +
     stateSelect.value +
     "&country=" +
-    countrySelect.value +
+    chosenCountry +
     "&key=" +
     key;
 
@@ -113,7 +84,6 @@ function fetchResults(e) {
     })
     .then(function (json) {
       displayResults(json);
-      console.log(json.data)
     });
 }
 
