@@ -2,7 +2,6 @@ const baseURL = "https://api.airvisual.com/v2/";
 const key = "8bac110c-fd5a-4b14-a6b0-f94021ccc437";
 let url;
 //TODO Make it just USA
-//TODO Temperature in Fairenheit
 //TODO Clear population selection before clicking new option
 const searchForm = document.querySelector("form");
 const countrySelect = document.getElementById("selector1");
@@ -12,14 +11,13 @@ const citySelect = document.getElementById("selector3");
 let chosenState;
 let chosenCity;
 
+// Initial Fetch to populate Countries
 fetch(baseURL + "countries?key=" + key)
   .then((result) => {
     return result.json();
   })
   .then((json) => {
     countryDropDown(json);
-    console.log(json);
-    console.log(json.data);
   });
 //COUNTRY DROPDOWN FUNCTION
 function countryDropDown(json) {
@@ -115,6 +113,7 @@ function fetchResults(e) {
     })
     .then(function (json) {
       displayResults(json);
+      console.log(json.data)
     });
 }
 
@@ -122,9 +121,9 @@ function displayResults(json) {
   let cityData = json.data.city; //current city
   let currentTime = json.data.current.pollution.ts; //timeStamp
   let polltuionIndex = json.data.current.pollution.aqicn; //AQI value based on China MEP standard
-  let tempInCelcius = json.data.current.weather.tp; //temperature in celcius
+  let tempInFahrenheit = (json.data.current.weather.tp) * 1.8 + 32; //temperature in fahrenheit
   currentCity.innerHTML = cityData;
   timeStamp.innerHTML = currentTime;
-  celciusTemp.innerHTML = tempInCelcius + "°C";
+  fahrenheitTemp.innerHTML = tempInFahrenheit + "°F";
   pollution.innerHTML = polltuionIndex;
 }
