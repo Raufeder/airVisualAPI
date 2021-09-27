@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="icon" href="assests/globe.png" />
+    <link rel="icon" href="assets/globe.png" />
     <title>Air Visual API</title>
 </head>
+
 <body>
     <h1>This application uses the China MEP scale to measure pollution for any city in the US.</h1>
-<br>
+    <br>
     <div class="wrapper">
         <select name="state" class="choose" id="selector1">
             <option id='stateID'>Choose State</option>
@@ -22,27 +24,28 @@
     <p>The scale is from 0-500 and the higher the number, the worse the air quality is.</p>
     <br>
 
-        <table>
-            <tr>
-                <th class='tableEntry'>TimeStamp</th>
-                <th class='tableEntry'>City</th>
-            </tr>
-            <tr>
-                <td id='timeStamp' class='tableEntry'>
-                </td>
-                <td id='currentCity' class='tableEntry'>
-                </td>
-            </tr>
-            <tr>
-                <th class='tableEntry'>Temperature in Fahrenheit</th>
-                <th class='tableEntry'>Pollution Index</th>
-            </tr>
-            <tr>
-                <td id='fahrenheitTemp' class='tableEntry'></td>
-                <td id="pollution" class='tableEntry'></td>
-            </tr>
+    <table>
+        <tr>
+            <th class='tableEntry'>TimeStamp</th>
+            <th class='tableEntry'>City</th>
+        </tr>
+        <tr>
+            <td id='timeStamp' class='tableEntry'>
+            </td>
+            <td id='currentCity' class='tableEntry'>
+            </td>
+        </tr>
+        <tr>
+            <th class='tableEntry'>Temperature in Fahrenheit</th>
+            <th class='tableEntry'>Pollution Index</th>
+        </tr>
+        <tr>
+            <td id='fahrenheitTemp' class='tableEntry'></td>
+            <td id="pollution" class='tableEntry'></td>
+        </tr>
 
-        </table>
+    </table>
     <script type="text/javascript" src="./scripts.js"></script>
 </body>
+
 </html>
