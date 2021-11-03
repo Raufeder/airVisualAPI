@@ -1,12 +1,12 @@
 const baseURL = "https://api.airvisual.com/v2/";
-const key = "8bac110c-fd5a-4b14-a6b0-f94021ccc437";
+const key = "6a9e4c6c-b452-4148-8d42-27023c3e9740";
 let url;
-//TODO Clear population selection before clicking new option
+
 const searchForm = document.querySelector("form");
 const stateSelect = document.getElementById("selector1");
 const citySelect = document.getElementById("selector2");
 
-let chosenCountry = "USA"
+let chosenCountry = "USA";
 let chosenState;
 let chosenCity;
 
@@ -18,7 +18,7 @@ fetch(baseURL + "states?country=" + chosenCountry + "&key=" + key)
   .then((json) => {
     toggleState(json);
   });
-        
+
 //STATE DROPDOWN FUNCTION
 function toggleState(json) {
   for (stateName of json.data) {
@@ -91,7 +91,7 @@ function displayResults(json) {
   let cityData = json.data.city; //current city
   let currentTime = json.data.current.pollution.ts; //timeStamp
   let polltuionIndex = json.data.current.pollution.aqicn; //AQI value based on China MEP standard
-  let tempInFahrenheit = (json.data.current.weather.tp) * 1.8 + 32; //temperature in fahrenheit
+  let tempInFahrenheit = json.data.current.weather.tp * 1.8 + 32; //temperature in fahrenheit
   currentCity.innerHTML = cityData;
   timeStamp.innerHTML = currentTime;
   fahrenheitTemp.innerHTML = tempInFahrenheit + "°F";
