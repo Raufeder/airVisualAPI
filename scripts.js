@@ -1,5 +1,5 @@
 const baseURL = "https://api.airvisual.com/v2/";
-const key = "6a9e4c6c-b452-4148-8d42-27023c3e9740";
+const key = "769b91a4-bf3e-4259-86b2-2578f27c9fc2";
 let url;
 
 const searchForm = document.querySelector("form");
@@ -13,6 +13,7 @@ let chosenCity;
 //CHOSEN COUNTRY TO POPULATE STATES
 fetch(baseURL + "states?country=" + chosenCountry + "&key=" + key)
   .then((result) => {
+    console.log(result);
     return result.json();
   })
   .then((json) => {
